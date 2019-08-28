@@ -1,14 +1,9 @@
-const URL_GET_TOKEN = "https://accounts.spotify.com/api/token";
+const URL_GET_TOKEN = "/api/token";
 const qs = require("qs");
 
 class API {
   static async getToken() {
-    // const clientCredentials = {
-    //   grant_type: "client_credentials",
-    //   client_id: "0189147f22ed4289a6e8a02db62431d3",
-    //   client_secret: "90390c27134c4643a8a5b3739b45aa4a"
-    // };
-    fetch(URL_GET_TOKEN, {
+    const res = await fetch(URL_GET_TOKEN, {
       method: "POST",
       mode: "cors",
       headers: {
@@ -20,7 +15,9 @@ class API {
         client_id: "0189147f22ed4289a6e8a02db62431d3",
         client_secret: "90390c27134c4643a8a5b3739b45aa4a"
       })
-    }).then(res => console.log(res));
+    });
+    const context = await res.json();
+    return context;
   }
 
   static async search(token, searchParams) {
@@ -35,7 +32,6 @@ class API {
       }
     );
     const context = await res.json();
-    // console.log(context);
     if (context.error) {
       alert(new Error(context.error.message));
     }

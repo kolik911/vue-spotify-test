@@ -1,21 +1,17 @@
 <template>
   <div class="spotify">
-    <!-- Login -->
-    <login></login>
-
-    <!-- <search-panel @search="search"></search-panel>
+    <search-panel @search="search"></search-panel>
 
     <ul class="search-list">
       <li v-for="item of result" :key="item.id">
         <p>Type searching: {{ item.type }}</p>
         <p>Name {{ item.type }}: {{ item.name }}</p>
       </li>
-    </ul>-->
+    </ul>
   </div>
 </template>
 
 <script>
-import Login from "./Login.vue";
 import SearchPanel from "./SearchPanel";
 import API from "../API";
 export default {
@@ -23,9 +19,15 @@ export default {
   data() {
     return {
       result: [],
-      accessToken:
-        "Bearer BQDFE1i5EwRJxDl0WRnKuNMVX6g2P-v7tOGZ6PZEOVrxe60nm6bMITTq3BfYBeNVpNoflkNzoYZ935sE-54"
+      accessToken: ""
     };
+  },
+  async created() {
+    const responce = await API.getToken();
+    this.accessToken = `Bearer ${responce.access_token}`;
+    setInterval(() => {
+      this.refreshToken();
+    }, 3000000);
   },
   methods: {
     async search(searchParams) {
@@ -37,10 +39,13 @@ export default {
       }
 
       this.result = data.items;
+    },
+    async refreshToken() {
+      const responce = await API.getToken();
+      this.accessToken = `Bearer ${responce.access_token}`;
     }
   },
   components: {
-    Login,
     SearchPanel
   }
 };
