@@ -2,6 +2,7 @@
   <div class="spotify">
     <!-- Login -->
     <login></login>
+
     <!-- <search-panel @search="search"></search-panel>
 
     <ul class="search-list">

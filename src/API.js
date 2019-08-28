@@ -8,22 +8,6 @@ class API {
     //   client_id: "0189147f22ed4289a6e8a02db62431d3",
     //   client_secret: "90390c27134c4643a8a5b3739b45aa4a"
     // };
-    // const response = await fetch(URL_GET_TOKEN, {
-    //   method: "POST",
-    //   mode: "no-cors",
-    //   headers: new Headers({
-    //     "Content-Type": "application/x-www-form-urlencoded",
-    //     Authorization:
-    //       "Basic  MDE4OTE0N2YyMmVkNDI4OWE2ZThhMDJkYjYyNDMxZDM6OTAzOTBjMjcxMzRjNDY0M2E4YTViMzczOWI0NWFhNGE="
-    //   }),
-    //   body: qs.stringify({
-    //     grant_type: "client_credentials"
-    //   })
-    // });
-    // const content = await response.json();
-    // console.log(response);
-    //
-
     fetch(URL_GET_TOKEN, {
       method: "POST",
       mode: "cors",
